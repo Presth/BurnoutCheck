@@ -4,6 +4,8 @@
 node_modules/
 
 # Expo
+.claude/
+.vscode/
 .expo/
 dist/
 web-build/
@@ -31,6 +33,7 @@ yarn-error.*
 *.pem
 
 # local env files
+.env
 .env*.local
 
 # typescript
@@ -39,3 +42,5 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+firebase/firestore.rules
