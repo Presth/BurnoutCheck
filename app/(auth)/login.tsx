@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { FontSize, Radius, Spacing } from "@/constants/theme";
+import { useAuth } from "@/context/AuthContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
 import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useAuth } from '@/context/AuthContext';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { useThemeColors } from '@/hooks/useThemeColors';
-import { isFirebaseAppConfigured, isFirebaseConfigured } from '@/services/firebase';
-import { FontSize, Radius, Spacing } from '@/constants/theme';
+  isFirebaseAppConfigured,
+  isFirebaseConfigured,
+} from "@/services/firebase";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
   const { user, signInWithGoogle, signInDemo } = useAuth();
@@ -25,7 +21,7 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (user) router.replace('/(app)/(tabs)');
+    if (user) router.replace("/(app)/(tabs)");
   }, [user, router]);
 
   const handleGoogleSignIn = async () => {
@@ -33,8 +29,9 @@ export default function LoginScreen() {
     try {
       await signInWithGoogle();
     } catch (e) {
-      const message = e instanceof Error ? e.message : 'Sign-in failed. Please try again.';
-      Alert.alert('Sign-in Error', message);
+      const message =
+        e instanceof Error ? e.message : "Sign-in failed. Please try again.";
+      Alert.alert("Sign-in Error", message);
     } finally {
       setLoading(false);
     }
@@ -55,21 +52,28 @@ export default function LoginScreen() {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.safe}>
-        <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.hero}>
             <View style={styles.logo}>
               <FontAwesome name="leaf" size={36} color={colors.primary} />
             </View>
             <Text style={styles.appName}>BurnoutCheck</Text>
             <Text style={styles.tagline}>
-              Track your daily habits, understand burnout risk, and get supportive wellness tips.
+              Track your daily habits, understand burnout risk, and get
+              supportive wellness tips.
             </Text>
           </View>
 
           <Card style={styles.card}>
-            <Text style={[styles.welcome, { color: colors.text }]}>Welcome, Student 👋</Text>
+            <Text style={[styles.welcome, { color: colors.text }]}>
+              Welcome, Student 👋
+            </Text>
             <Text style={[styles.hint, { color: colors.textMuted }]}>
-              Sign in to save your logs and track your wellness journey over time.
+              Sign in to save your logs and track your wellness journey over
+              time.
             </Text>
 
             {isFirebaseConfigured ? (
@@ -82,12 +86,23 @@ export default function LoginScreen() {
               />
             ) : (
               <>
-                <View style={[styles.notice, { backgroundColor: colors.accent + '30' }]}>
-                  <FontAwesome name="info-circle" size={16} color={colors.primary} />
-                  <Text style={[styles.noticeText, { color: colors.textSecondary }]}>
+                <View
+                  style={[
+                    styles.notice,
+                    { backgroundColor: colors.accent + "30" },
+                  ]}
+                >
+                  <FontAwesome
+                    name="info-circle"
+                    size={16}
+                    color={colors.primary}
+                  />
+                  <Text
+                    style={[styles.noticeText, { color: colors.textSecondary }]}
+                  >
                     {isFirebaseAppConfigured
-                      ? 'Google Sign-In needs a Firebase matching Web client ID. Try demo mode while you update it.'
-                      : 'Firebase not configured yet. Try demo mode to explore the app.'}
+                      ? "Google Sign-In needs a Firebase matching Web client ID. Try demo mode while you update it."
+                      : "Firebase not configured yet. Try demo mode to explore the app."}
                   </Text>
                 </View>
                 <Button
@@ -110,8 +125,38 @@ export default function LoginScreen() {
             )}
           </Card>
 
-          <Text style={styles.footer}>
+          <Text
+            style={[
+              styles.footer,
+              {
+                marginBottom: 20,
+              },
+            ]}
+          >
             Built for Nigerian university students · Your data stays private
+          </Text>
+          <Text style={styles.footer}>By </Text>
+          <Text
+            style={[
+              styles.footer,
+              {
+                fontSize: 20,
+                marginBottom: 20,
+              },
+            ]}
+          >
+            Afolabi Precious
+          </Text>
+          <Text style={styles.footer}>Supervised by</Text>
+          <Text
+            style={[
+              styles.footer,
+              {
+                fontSize: 20,
+              },
+            ]}
+          >
+            Mr. O. M. Adegoke
           </Text>
         </ScrollView>
       </SafeAreaView>
@@ -125,30 +170,30 @@ const styles = StyleSheet.create({
   scroll: {
     flexGrow: 1,
     padding: Spacing.lg,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   hero: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: Spacing.xl,
   },
   logo: {
     width: 72,
     height: 72,
     borderRadius: 36,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: Spacing.md,
   },
   appName: {
     fontSize: FontSize.xxl,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "700",
+    color: "#fff",
   },
   tagline: {
     fontSize: FontSize.md,
-    color: 'rgba(255,255,255,0.9)',
-    textAlign: 'center',
+    color: "rgba(255,255,255,0.9)",
+    textAlign: "center",
     marginTop: Spacing.sm,
     lineHeight: 24,
     paddingHorizontal: Spacing.md,
@@ -158,7 +203,7 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: FontSize.xl,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   hint: {
     fontSize: FontSize.sm,
@@ -166,12 +211,12 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   notice: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.sm,
     padding: Spacing.md,
     borderRadius: Radius.md,
     marginTop: Spacing.md,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
   },
   noticeText: {
     flex: 1,
@@ -179,8 +224,8 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   footer: {
-    textAlign: 'center',
-    color: 'rgba(255,255,255,0.75)',
+    textAlign: "center",
+    color: "rgba(255,255,255,0.75)",
     fontSize: FontSize.xs,
   },
 });

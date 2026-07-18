@@ -111,8 +111,8 @@ export function generateDemoAssessments(logs: LogEntry[]): Assessment[] {
 
 export const DEMO_USER = {
   uid: DEMO_USER_ID,
-  name: "Ada Student",
-  email: "ada.student@jabu.edu.ng",
+  name: "Afolabi Precious",
+  email: "afolabi.precious@students.jabu.edu.ng",
   photoURL: undefined,
   createdAt: daysAgo(30),
 };

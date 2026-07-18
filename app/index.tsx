@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { useRouter } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { useAuth } from '@/context/AuthContext';
-import { useThemeColors } from '@/hooks/useThemeColors';
-import { FontSize, Spacing } from '@/constants/theme';
+import { FontSize, Spacing } from "@/constants/theme";
+import { useAuth } from "@/context/AuthContext";
+import { useThemeColors } from "@/hooks/useThemeColors";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
 export default function SplashScreen() {
   const { user, loading } = useAuth();
@@ -17,9 +17,9 @@ export default function SplashScreen() {
 
     const timer = setTimeout(() => {
       if (user) {
-        router.replace('/(app)/(tabs)');
+        router.replace("/(app)/(tabs)");
       } else {
-        router.replace('/(auth)/login');
+        router.replace("/(auth)/login");
       }
     }, 1500);
 
@@ -46,29 +46,29 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   content: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   iconCircle: {
     width: 88,
     height: 88,
     borderRadius: 44,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: Spacing.lg,
   },
   title: {
     fontSize: FontSize.hero,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "700",
+    color: "#fff",
   },
   subtitle: {
     fontSize: FontSize.md,
-    color: 'rgba(255,255,255,0.85)',
+    color: "rgba(255,255,255,0.85)",
     marginTop: Spacing.sm,
   },
 });
