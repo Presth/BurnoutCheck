@@ -44,3 +44,4 @@ yarn-error.*
 /android
 
 firebase/firestore.rules
+google-services.json
